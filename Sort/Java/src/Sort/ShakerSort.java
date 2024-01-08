@@ -53,7 +53,7 @@ public class ShakerSort implements Sort {
 			for (int i = left; i < right; i++) {
 				if ( comp( dst[i], dst[i+1] ) ) {
 					swap(dst, i, i+1);
-					lastSwap = i+1;
+					lastSwap = i;
 				}
 			}
 			right = lastSwap;
@@ -63,7 +63,7 @@ public class ShakerSort implements Sort {
 			for (int i = right; i > left; i--) {
 				if ( comp( dst[i-1], dst[i] ) ) {
 					swap(dst, i-1, i);
-					lastSwap = i-1;
+					lastSwap = i;
 				}
 			}
 			left = lastSwap;
