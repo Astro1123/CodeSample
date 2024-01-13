@@ -23,6 +23,10 @@ public class SortTestDriver {
 		//new CombSort(),
 		//new GnomeSort(),
 		//new ShakerSort(),
+		//new StoogeSort(),
+		//new BogoSort(),
+		//new BozoSort(),
+		//new SlowSort(),
 		/*
 		new BubbleSortFast(), 
 		new SelectionSortFast(), 
@@ -34,6 +38,7 @@ public class SortTestDriver {
 		new CombSortFast(),
 		new GnomeSortFast(),
 		new ShakerSortFast(),
+		new StoogeSortFast(),
 		*/
 	};
 	
