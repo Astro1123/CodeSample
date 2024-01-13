@@ -5,11 +5,12 @@ import java.util.Random;
 
 import Debug.Log;
 import Sort.Const.Order;
+import Sort.Const.Pivot;
 
 public class QuickSort implements Sort {
 	private Order order;
 	private Pivot piv = Pivot.MEDIAN;
-	private final String methodName = "Quick sort";
+	protected final String methodName = "Quick sort";
 	
 	public QuickSort() {
 		setOrder(Order.ASC);
@@ -20,6 +21,21 @@ public class QuickSort implements Sort {
 	}
 	
 	public QuickSort(boolean order) {
+		setOrder(order);
+	}
+	
+	public QuickSort(Pivot piv) {
+		setPivot(piv);
+		setOrder(Order.ASC);
+	}
+	
+	public QuickSort(Pivot piv, Order order) {
+		setPivot(piv);
+		setOrder(order);
+	}
+	
+	public QuickSort(Pivot piv, boolean order) {
+		setPivot(piv);
 		setOrder(order);
 	}
 	
@@ -48,6 +64,9 @@ public class QuickSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		
 		quickSort(dst, 0, dst.length-1);
@@ -60,15 +79,12 @@ public class QuickSort implements Sort {
 		return methodName;
 	}
 	
-	private void quickSort(int[] arr, final int left, final int right) {
-		if (left == right) return;
+	protected void quickSort(int[] arr, final int left, final int right) {
+		if (left >= right) return;
 		PivInfo pivot;
 		int l = left;
 		int r = right;
 		pivot = selPivot(arr, left, right);
-		if (pivot == null) {
-			return;
-		}
 		while ( true ) {
 			while ( comp( arr[l], pivot.value ) ) {
 				l++;
@@ -83,12 +99,8 @@ public class QuickSort implements Sort {
 			l++;
 			r--;
 		}
-		if (left < l-1) {
-			quickSort(arr, left, l-1);
-		}
-		if (r+1 < right) {
-			quickSort(arr, r+1, right);
-		}
+		quickSort(arr, left, l-1);
+		quickSort(arr, r+1, right);
 	}
 	
 	private boolean comp(int i, int j) {
@@ -98,7 +110,7 @@ public class QuickSort implements Sort {
 		return i > j;
 	}
 	
-	private void swap(int[] arr, int e1, int e2) {
+	protected void swap(int[] arr, int e1, int e2) {
 		int tmp = arr[e1];
 		arr[e1] = arr[e2];
 		arr[e2] = tmp;
@@ -125,7 +137,7 @@ public class QuickSort implements Sort {
 				p = new PivInfo( arr[right], right );
 				break;
 			default:
-				p = null;
+				p = new PivInfo( arr[left], left );
 				break;
 		}
 		return p;
@@ -179,13 +191,5 @@ public class QuickSort implements Sort {
 			this.value = value;
 			this.pos = pos;
 		}
-	}
-	
-	public enum Pivot {
-		MEDIAN,
-		RAND,
-		LEFT,
-		RIGHT,
-		MID
 	}
 }

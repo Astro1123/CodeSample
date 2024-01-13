@@ -16,6 +16,7 @@ public interface Sort {
 	//public char[] sort(final char[] src);
 	//public short[] sort(final short[] src);
 	public int[] sort(final int[] src);
+	//public int[] sortFast(final int[] src);
 	//public long[] sort(final long[] src);
 	//public List<T> sort(final List<T> src);
 }

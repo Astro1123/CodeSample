@@ -42,6 +42,9 @@ public class MergeSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		int[] tmp = new int[src.length];
 		
@@ -55,7 +58,7 @@ public class MergeSort implements Sort {
 		return methodName;
 	}
 	
-	private void mergeSort(int[] arr, int[] tmp, int left, int right) {
+	protected void mergeSort(int[] arr, int[] tmp, int left, int right) {
 		int mid;
 		if (right > left) {
 			mid = (right + left) / 2;
@@ -66,7 +69,7 @@ public class MergeSort implements Sort {
 		}
 	}
 	
-	private void merge(int[] arr, int[] tmp, int left, int mid, int right) {
+	protected void merge(int[] arr, int[] tmp, int left, int mid, int right) {
 		int lp = left;
 		int rp = mid+1;
 		int tp = 0;

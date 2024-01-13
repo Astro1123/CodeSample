@@ -2,6 +2,7 @@ package Test;
 
 import Sort.*;
 import Sort.Const.*;
+import Sort.Fast.*;
 
 public class SortTestDriver {
 	private final int LENGTH = 16;
@@ -12,10 +13,28 @@ public class SortTestDriver {
 		new HeapSort(), 
 		new MergeSort(), 
 		new QuickSort(),
+		
 		//new ShellSort(),
+		//new ShellSort(ShellGapMethod.FRANK_LAZARUS),
+		//new ShellSort(ShellGapMethod.KNUTH),
+		//new ShellSort(ShellGapMethod.HIBBARD),
+		//new ShellSort(ShellGapMethod.PAPERNOV_STASEVICH),
+		//new ShellSort(ShellGapMethod.SEDGEWICK),
 		//new CombSort(),
 		//new GnomeSort(),
 		//new ShakerSort(),
+		/*
+		new BubbleSortFast(), 
+		new SelectionSortFast(), 
+		new InsertionSortFast(), 
+		new HeapSortFast(), 
+		new MergeSortFast(), 
+		new QuickSortFast(),
+		new ShellSortFast(),
+		new CombSortFast(),
+		new GnomeSortFast(),
+		new ShakerSortFast(),
+		*/
 	};
 	
 	public static void main(String[] args) {
@@ -24,7 +43,6 @@ public class SortTestDriver {
 	}
 	
 	private void startDriver() {
-		System.out.println("----------------------------------------");
 		for (Sort s : LIST) {
 			System.out.print("Method: ");
 			System.out.println(s.getName());
@@ -39,7 +57,14 @@ public class SortTestDriver {
 		int[] arr = t.make(LENGTH);
 		t.print(arr);
 		
+		//long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		int[] result = sort.sort(arr);
-		t.print(result);
+		//long endTime = System.currentTimeMillis();
+		long endTime = System.nanoTime();
+		if (result != null) {
+			t.print(result);
+			System.out.println(String.format("Time: %d ns", endTime - startTime));
+		}
 	}
 }

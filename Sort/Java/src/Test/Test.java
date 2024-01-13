@@ -1,6 +1,7 @@
 package Test;
 
 import java.util.Random;
+import java.util.Arrays;
 
 public class Test {
 	
@@ -36,6 +37,24 @@ public class Test {
 			arr[i] = i + 1;
 		}
 		return arr;
+	}
+	
+	public int[] makeDESC(final int len) {
+		int[] arr = new int[len];
+		for (int i = 0; i < len; i++) {
+			arr[i] = len - i - 1;
+		}
+		return arr;
+	}
+	
+	public int[] reverse(final int[] src) {
+		int len = src.length;
+		int[] dst = Arrays.copyOf(src, len);
+		
+		for (int i = 0; i < len / 2; i++) {
+			swap(dst, len-i-1, i);
+		}
+		return dst;
 	}
 	
 	public void print(final int[] arr) {

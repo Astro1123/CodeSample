@@ -42,6 +42,9 @@ public class InsertionSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		
 		for (int i = 1; i < dst.length; i++) {
@@ -65,7 +68,7 @@ public class InsertionSort implements Sort {
 		return i < j;
 	}
 	
-	private void insert(int[] arr, int i) {
+	protected void insert(int[] arr, int i) {
 		int tmp = arr[i];
 		int j = i;
 		do {

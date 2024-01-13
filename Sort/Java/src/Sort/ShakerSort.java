@@ -42,6 +42,9 @@ public class ShakerSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		int left = 0;
 		int right = dst.length-1;
@@ -84,7 +87,7 @@ public class ShakerSort implements Sort {
 		return i < j;
 	}
 	
-	private void swap(int[] arr, int e1, int e2) {
+	protected void swap(int[] arr, int e1, int e2) {
 		int tmp = arr[e1];
 		arr[e1] = arr[e2];
 		arr[e2] = tmp;

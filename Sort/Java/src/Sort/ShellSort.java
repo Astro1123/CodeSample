@@ -11,7 +11,7 @@ import Sort.Const.ShellGapMethod;
 public class ShellSort implements Sort {
 	private Order order;
 	private ShellGapMethod method;
-	private final String methodName = "Shell sort";
+	protected final String methodName = "Shell sort";
 	private Deque<Integer> queue;
 	
 	public ShellSort() {
@@ -88,9 +88,15 @@ public class ShellSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		makeQueue(dst.length);
 		
+		if (this.queue == null) {
+			return null;
+		}
 		while (this.queue.size() > 0) {
 			int h = this.queue.removeLast();
 			for (int i = h; i < dst.length; i++) {
@@ -115,7 +121,7 @@ public class ShellSort implements Sort {
 		return i < j;
 	}
 	
-	private void insert(int[] arr, int i, int h) {
+	protected void insert(int[] arr, int i, int h) {
 		int tmp = arr[i];
 		int j = i;
 		do {

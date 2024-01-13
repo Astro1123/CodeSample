@@ -42,6 +42,9 @@ public class HeapSort implements Sort {
 	
 	@Override
 	public int[] sort(final int[] src) {
+		if (src == null) {
+			return null;
+		}
 		int[] dst = Arrays.copyOf(src, src.length);
 		
 		int i;
@@ -60,13 +63,13 @@ public class HeapSort implements Sort {
 		
 		return dst;
 	}
-	
+		
 	@Override
 	public String getName() {
 		return methodName;
 	}
 	
-	private void extHeap(int[] arr, int root, int bottom) {
+	protected void extHeap(int[] arr, int root, int bottom) {
 		int child = (2 * root) + 1;
 		int tmp = arr[root];
 		

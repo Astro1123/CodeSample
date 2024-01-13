@@ -65,11 +65,23 @@ public class Log {
 	}
 	
 	public void printLogInfo(Object obj) {
+		throwableStackTraceElement = new Throwable().getStackTrace()[1];
 		printLogMain(LogLevel.LOG_INFO.getID(), obj.toString());
 	}
 	
 	public void printLogInfo(String format, Object... obj) {
+		throwableStackTraceElement = new Throwable().getStackTrace()[1];
 		printLogMain(LogLevel.LOG_INFO.getID(), format, obj);
+	}
+	
+	public void printLogDebug(Object obj) {
+		throwableStackTraceElement = new Throwable().getStackTrace()[1];
+		printLogMain(LogLevel.LOG_DEBUG.getID(), obj.toString());
+	}
+	
+	public void printLogDebug(String format, Object... obj) {
+		throwableStackTraceElement = new Throwable().getStackTrace()[1];
+		printLogMain(LogLevel.LOG_DEBUG.getID(), format, obj);
 	}
 	
 	public void printLog(LogLevel level, Object obj) {
