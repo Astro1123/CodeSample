@@ -9,18 +9,22 @@ import Sort.Const.Pivot;
 
 public class QuickSort implements Sort {
 	private Order order;
-	private Pivot piv = Pivot.MEDIAN;
+	private Pivot piv;
 	protected final String methodName = "Quick sort";
+	private PivotFunc pf;
 	
 	public QuickSort() {
+		setPivot(Pivot.MID);
 		setOrder(Order.ASC);
 	}
 	
 	public QuickSort(Order order) {
+		setPivot(Pivot.MID);
 		setOrder(order);
 	}
 	
 	public QuickSort(boolean order) {
+		setPivot(Pivot.MID);
 		setOrder(order);
 	}
 	
@@ -60,6 +64,7 @@ public class QuickSort implements Sort {
 	
 	public void setPivot(Pivot piv) {
 		this.piv = piv;
+		pf = selectPivot();
 	}
 	
 	@Override
@@ -79,17 +84,41 @@ public class QuickSort implements Sort {
 		return methodName;
 	}
 	
+	private PivotFunc selectPivot() {
+		PivotFunc pf;
+		switch (this.piv) {
+			case MEDIAN:
+				pf = new MedianFunc();
+				break;
+			case RAND:
+				pf = new RndFunc();
+				break;
+			case MID:
+				pf = new MidFunc();
+				break;
+			case LEFT:
+				pf = new LeftFunc();
+				break;
+			case RIGHT:
+				pf = new RightFunc();
+				break;
+			default:
+				pf = new LeftFunc();
+				break;
+		}
+		return pf;
+	}
+	
 	protected void quickSort(int[] arr, final int left, final int right) {
 		if (left >= right) return;
-		PivInfo pivot;
 		int l = left;
 		int r = right;
-		pivot = selPivot(arr, left, right);
+		int pivot = pf.func(arr, left, right);
 		while ( true ) {
-			while ( comp( arr[l], pivot.value ) ) {
+			while ( comp( arr[l], pivot ) ) {
 				l++;
 			}
-			while ( comp( pivot.value, arr[r] ) ) {
+			while ( comp( pivot, arr[r] ) ) {
 				r--;
 			}
 			if (l >= r) {
@@ -116,80 +145,72 @@ public class QuickSort implements Sort {
 		arr[e2] = tmp;
 	}
 	
-	private PivInfo selPivot(int[] arr, int left, int right) {
-		PivInfo p;
-		switch (this.piv) {
-			case MEDIAN:
-				p = median(arr, left, right);
-				break;
-			case RAND:
-				int tmp = rand(left, right);
-				p = new PivInfo( arr[tmp], tmp );
-				break;
-			case MID:
-				int mid = (left + right) / 2;
-				p = new PivInfo( arr[mid], mid );
-				break;
-			case LEFT:
-				p = new PivInfo( arr[left], left );
-				break;
-			case RIGHT:
-				p = new PivInfo( arr[right], right );
-				break;
-			default:
-				p = new PivInfo( arr[left], left );
-				break;
-		}
-		return p;
+	private interface PivotFunc {
+		public int func(int[] arr, int left, int right);
 	}
 	
-	private PivInfo median(int[] arr, int left, int right) {
-		int mid = (left + right) / 2;
-		PivInfo[] p = new PivInfo[3];
-		p[0] = new PivInfo(arr[left], left);
-		p[1] = new PivInfo(arr[mid], mid);
-		p[2] = new PivInfo(arr[right], right);
-		
-		int max;
-		int pos;
-		for (int i = 0; i < 2; i++) {
-			max = p[0].value;
-			pos = 0;
-			for (int j = 1; j < 3-i; j++) {
-				if (max < p[j].value) {
-					max = p[j].value;
-					pos = j;
+	private class MidFunc implements PivotFunc {
+		@Override
+		public int func(int[] arr, int left, int right) {
+			return arr[(left+right)/2];
+		}
+	}
+	
+	private class LeftFunc implements PivotFunc {
+		@Override
+		public int func(int[] arr, int left, int right) {
+			return arr[left];
+		}
+	}
+	
+	private class RightFunc implements PivotFunc {
+		@Override
+		public int func(int[] arr, int left, int right) {
+			return arr[right];
+		}
+	}
+	
+	private class RndFunc implements PivotFunc {
+		@Override
+		public int func(int[] arr, int left, int right) {
+			return arr[rand(left, right)];
+		}
+	
+		private int rand(int min, int max) {
+			Random rand = new Random();
+			double r = rand.nextDouble();
+			
+			int result = (int)(r * (max + 1 - min) + min);
+			return result;
+		}
+	}
+	
+	private class MedianFunc implements PivotFunc {
+		@Override
+		public int func(int[] arr, int left, int right) {
+			int p = -1;
+			int l = arr[left];
+			int r = arr[right];
+			int m = arr[(left + right) / 2];
+			
+			if (l <= m) {
+				if (m <= r) {
+					p = m;
+				} else if (r <= l) {
+					p = l;
+				} else {
+					p = r;
+				}
+			} else {
+				if (r <= m) {
+					p = m;
+				} else if (l <= r) {
+					p = l;
+				} else {
+					p = r;
 				}
 			}
-			PivInfo tmp = p[2-i];
-			p[2-i] = p[pos];
-			p[pos] = tmp;
-		}
-		return p[1];
-	}
-	
-	private int rand(int min, int max) {
-		Random rand = new Random();
-		double r = rand.nextDouble();
-		if (min > max) {
-			int tmp = max;
-			max = min;
-			min = tmp;
-		}
-		
-		int result = (int)(r * (max + 1 - min) + min);
-		return result;
-	}
-	
-	private class PivInfo {
-		int value;
-		int pos;
-		
-		public PivInfo() {}
-		
-		public PivInfo(int value, int pos) {
-			this.value = value;
-			this.pos = pos;
+			return p;
 		}
 	}
 }

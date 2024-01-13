@@ -91,11 +91,6 @@ public class BozoSort implements Sort {
 	protected int rand(int min, int max) {
 		Random random = new Random();
 		double r = random.nextDouble();
-		if (min > max) {
-			int tmp = max;
-			max = min;
-			min = tmp;
-		}
 		
 		int result = (int)(r * (max + 1 - min) + min);
 		return result;

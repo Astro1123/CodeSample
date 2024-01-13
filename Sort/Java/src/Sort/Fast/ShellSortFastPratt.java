@@ -31,7 +31,7 @@ public class ShellSortFastPratt extends ShellSortFast {
 		do {
 			h = ((int)Math.pow(3, k) - 1) / 2;
 			k++;
-		} while ( h <= (int)(n / 3) );
+		} while ( h <= Math.ceil((double)n / 3) );
 		return h / 3;
 	}
 	
