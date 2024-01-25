@@ -21,5 +21,4 @@ public class GnomeSortFast extends GnomeSort {
 		
 		return dst;
 	}
-	
 }

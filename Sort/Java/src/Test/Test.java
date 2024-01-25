@@ -102,4 +102,32 @@ public class Test {
 		int result = (int)(r * (max + 1 - min) + min);
 		return result;
 	}
+	
+	public String state(int[] arr) {
+		int len = arr.length;
+		int i;
+		boolean res = true;
+		
+		for (i = 0; i < len - 1; i++) {
+			if (arr[i] > arr[i+1]) {
+				res = false;
+				break;
+			}
+		}
+		if (res) {
+			return "Ascending";
+		}
+		res = true;
+		
+		for (i = 0; i < len - 1; i++) {
+			if (arr[i] < arr[i+1]) {
+				res = false;
+				break;
+			}
+		}
+		if (res) {
+			return "Descending";
+		}
+		return "Not sorted";
+	}
 }

@@ -6,6 +6,7 @@ import java.util.Random;
 import Debug.Log;
 import Sort.Const.Order;
 import Sort.Const.Pivot;
+import Sort.Comparator.*;
 
 public class QuickSort implements Sort {
 	private Order order;
@@ -133,10 +134,7 @@ public class QuickSort implements Sort {
 	}
 	
 	private boolean comp(int i, int j) {
-		if (this.order == Order.ASC) {
-			return i < j;
-		}
-		return i > j;
+		return this.order.compR(i, j);
 	}
 	
 	protected void swap(int[] arr, int e1, int e2) {

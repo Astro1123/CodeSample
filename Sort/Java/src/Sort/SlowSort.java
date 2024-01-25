@@ -72,10 +72,7 @@ public class SlowSort implements Sort {
 	}
 	
 	protected boolean comp(int i, int j) {
-		if (this.order == Order.ASC) {
-			return i > j;
-		}
-		return i < j;
+		return this.order.comp(i, j);
 	}
 	
 	protected void swap(int[] arr, int e1, int e2) {

@@ -5,8 +5,8 @@ import java.util.Arrays;
 import Debug.Log;
 import Sort.*;
 
-public class ShellSortFastPratt extends ShellSortFast {
-	protected final String methodName = "Shell sort (Pratt)";
+public class ShellSortFastKnuth extends ShellSortFast {
+	protected final String methodName = "Shell sort (Knuth)";
 	@Override
 	public int[] sort(final int[] src) {
 		int[] dst = Arrays.copyOf(src, src.length);

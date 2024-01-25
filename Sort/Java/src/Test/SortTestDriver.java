@@ -3,6 +3,7 @@ package Test;
 import Sort.*;
 import Sort.Const.*;
 import Sort.Fast.*;
+import Sort.SortNC.*;
 
 public class SortTestDriver {
 	private final int LENGTH = 16;
@@ -20,6 +21,7 @@ public class SortTestDriver {
 		//new ShellSort(ShellGapMethod.HIBBARD),
 		//new ShellSort(ShellGapMethod.PAPERNOV_STASEVICH),
 		//new ShellSort(ShellGapMethod.SEDGEWICK),
+		//new ShellSort(ShellGapMethod.PRATT),
 		//new CombSort(),
 		//new GnomeSort(),
 		//new ShakerSort(),
@@ -32,7 +34,7 @@ public class SortTestDriver {
 		new QuickSortFast(),
 		new QuickSortFastMid(),
 		new ShellSortFast(),
-		new ShellSortFastPratt(),
+		new ShellSortFastKnuth(),
 		new CombSortFast(),
 		new GnomeSortFast(),
 		new ShakerSortFast(),
@@ -42,6 +44,11 @@ public class SortTestDriver {
 		//new BogoSort(),
 		//new BozoSort(),
 		//new SlowSort(),
+		
+		//new SleepSort(),
+		//new CountingSort(LENGTH),
+		//new BinSort(LENGTH),
+		//new LSDRadixSort(),
 	};
 	
 	public static void main(String[] args) {
@@ -71,6 +78,7 @@ public class SortTestDriver {
 		long endTime = System.nanoTime();
 		if (result != null) {
 			t.print(result);
+			//System.out.println(String.format("Result: %s", t.state(result)));
 			System.out.println(String.format("Time: %d ns", endTime - startTime));
 		}
 	}

@@ -1,8 +1,6 @@
 package Sort;
 
 import java.util.Arrays;
-import java.util.Deque;
-import java.util.ArrayDeque;
 
 import Debug.Log;
 import Sort.Const.Order;
@@ -12,7 +10,6 @@ public class ShellSort implements Sort {
 	private Order order;
 	private ShellGapMethod method;
 	protected final String methodName = "Shell sort";
-	private Deque<Integer> queue;
 	
 	public ShellSort() {
 		setOrder(Order.ASC);
@@ -92,18 +89,18 @@ public class ShellSort implements Sort {
 			return null;
 		}
 		int[] dst = Arrays.copyOf(src, src.length);
-		makeQueue(dst.length);
+		this.method.init(dst.length);
 		
-		if (this.queue == null) {
-			return null;
-		}
-		while (this.queue.size() > 0) {
-			int h = this.queue.removeLast();
+		//System.out.println(method);
+		int h = this.method.next();
+		while (h >= 1) {
+			//System.out.println(h);
 			for (int i = h; i < dst.length; i++) {
 				if ( comp( dst[i - h], dst[i] ) ) {
 					insert(dst, i, h);
 				}
 			}
+			h = this.method.next();
 		}
 		
 		return dst;
@@ -115,10 +112,7 @@ public class ShellSort implements Sort {
 	}
 	
 	private boolean comp(int i, int j) {
-		if (this.order == Order.ASC) {
-			return i > j;
-		}
-		return i < j;
+		return this.order.comp(i, j);
 	}
 	
 	protected void insert(int[] arr, int i, int h) {
@@ -129,90 +123,5 @@ public class ShellSort implements Sort {
 			j -= h;
 		} while (j >= h && comp( arr[j - h], tmp ) );
 		arr[j] = tmp;
-	}
-	
-	private void makeQueue(final int len) {
-		if (len <= 0) {
-			this.queue = null;
-			return;
-		}
-		this.queue = new ArrayDeque<>();
-		int gap;
-		switch (this.method) {
-			case SHELL: {
-				gap = len;
-				do {
-					gap = (int)(gap / 2);
-					this.queue.addLast(gap);
-				} while(gap > 1);
-				break;
-			}
-			case FRANK_LAZARUS: {
-				int k = 1;
-				do {
-					gap = 2 * (int)(len / Math.pow(2, k+1)) + 1;
-					k++;
-					this.queue.addLast(gap);
-				} while(gap > 1);
-				break;
-			}
-			case KNUTH: {
-				int k = 1;
-				while (true) {
-					gap = (int)((Math.pow(3, k) - 1) / 2);
-					k++;
-					if (gap <= Math.ceil(len / 3)) {
-						this.queue.addFirst(gap);
-					} else {
-						break;
-					}
-				}
-				break;
-			}
-			case HIBBARD: {
-				int k = 1;
-				while (true) {
-					gap = (int)(Math.pow(2, k) - 1);
-					k++;
-					if (gap < len) {
-						this.queue.addFirst(gap);
-					} else {
-						break;
-					}
-				}
-				break;
-			}
-			case PAPERNOV_STASEVICH: {
-				int k = 1;
-				this.queue.addLast(1);
-				while (true) {
-					gap = (int)(Math.pow(2, k) + 1);
-					k++;
-					if (gap < len) {
-						this.queue.addFirst(gap);
-					} else {
-						break;
-					}
-				}
-				break;
-			}
-			case SEDGEWICK: {
-				int k = 1;
-				this.queue.addLast(1);
-				while (true) {
-					gap = (int)(Math.pow(4, k) + 3 * Math.pow(2, k-1) + 1);
-					k++;
-					if (gap < len) {
-						this.queue.addFirst(gap);
-					} else {
-						break;
-					}
-				}
-				break;
-			}
-			default:
-				this.queue = null;
-				break;
-		}
 	}
 }

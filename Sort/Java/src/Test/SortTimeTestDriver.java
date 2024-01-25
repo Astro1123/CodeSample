@@ -14,7 +14,7 @@ public class SortTimeTestDriver {
 		new GnomeSortFast(),
 		new InsertionSortFast(),
 		new ShellSortFast(),
-		new ShellSortFastPratt(),
+		new ShellSortFastKnuth(),
 		new SelectionSortFast(), 
 		new HeapSortFast(), 
 		new MergeSortFast(), 
