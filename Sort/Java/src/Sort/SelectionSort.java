@@ -46,17 +46,14 @@ public class SelectionSort implements Sort {
 			return null;
 		}
 		int[] dst = Arrays.copyOf(src, src.length);
-		int ext;
 		int extpos;
 		int i, j;
 		
 		for (i = 0; i < dst.length-1; i++) {
-			ext = dst[i];
 			extpos = i;
 			for (j = i+1; j < dst.length; j++) {
-				if ( comp( ext, dst[j] ) ) {
+				if ( comp( dst[extpos], dst[j] ) ) {
 					extpos = j;
-					ext = dst[j];
 				}
 			}
 			swap(dst, i, extpos);
