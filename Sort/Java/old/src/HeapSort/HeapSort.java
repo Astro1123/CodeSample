@@ -26,7 +26,7 @@ public class HeapSort {
 		int i;
 		int tmp;
 		
-		for (i = (dst.length-1) / 2; i >= 0; i--) {
+		for (i = (dst.length / 2) - 1; i >= 0; i--) {
 			extHeap(dst, i, dst.length - 1);
 		}
 		
