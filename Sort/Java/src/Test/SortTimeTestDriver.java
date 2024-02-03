@@ -16,6 +16,7 @@ public class SortTimeTestDriver {
 		new ShellSortFast(),
 		new ShellSortFastKnuth(),
 		new SelectionSortFast(), 
+		new DoubleSelectionSortFast(), 
 		new HeapSortFast(), 
 		new MergeSortFast(), 
 		new QuickSortFast(),

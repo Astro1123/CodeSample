@@ -1,0 +1,68 @@
+Length: 16384
+Loop: 100
+
+Method: Bubble sort
+Random:   Time: 268021385.82 ns
+Sorted:   Time: 42874441.69 ns
+Reverse:  Time: 243321134.58 ns
+----------------------------------------
+Method: Shaker sort
+Random:   Time: 136561915.85 ns
+Sorted:   Time: 24290.47 ns
+Reverse:  Time: 220954472.08 ns
+----------------------------------------
+Method: Comb sort
+Random:   Time: 902107.08 ns
+Sorted:   Time: 162377.90 ns
+Reverse:  Time: 210120.83 ns
+----------------------------------------
+Method: Gnome sort
+Random:   Time: 113922244.20 ns
+Sorted:   Time: 28420.87 ns
+Reverse:  Time: 228977305.00 ns
+----------------------------------------
+Method: Insertion sort
+Random:   Time: 15654126.66 ns
+Sorted:   Time: 10685.84 ns
+Reverse:  Time: 31083590.84 ns
+----------------------------------------
+Method: Shell sort (Shell)
+Random:   Time: 2230256.30 ns
+Sorted:   Time: 211951.68 ns
+Reverse:  Time: 257207.00 ns
+----------------------------------------
+Method: Shell sort (Knuth)
+Random:   Time: 1184708.28 ns
+Sorted:   Time: 115126.71 ns
+Reverse:  Time: 190162.14 ns
+----------------------------------------
+Method: Selection sort
+Random:   Time: 51282487.52 ns
+Sorted:   Time: 48627295.89 ns
+Reverse:  Time: 62244177.93 ns
+----------------------------------------
+Method: Double Selection sort
+Random:   Time: 49685058.75 ns
+Sorted:   Time: 48156429.63 ns
+Reverse:  Time: 50309625.81 ns
+----------------------------------------
+Method: Heap sort
+Random:   Time: 1089027.92 ns
+Sorted:   Time: 835198.36 ns
+Reverse:  Time: 811284.09 ns
+----------------------------------------
+Method: Merge sort
+Random:   Time: 1068692.95 ns
+Sorted:   Time: 375564.97 ns
+Reverse:  Time: 365272.06 ns
+----------------------------------------
+Method: Quick sort (Left)
+Random:   Time: 984751.19 ns
+Sorted:   Time: 57693047.51 ns
+Reverse:  Time: 71090454.14 ns
+----------------------------------------
+Method: Quick sort (Mid)
+Random:   Time: 1011301.70 ns
+Sorted:   Time: 180530.35 ns
+Reverse:  Time: 178110.76 ns
+----------------------------------------
